@@ -13,7 +13,7 @@ class KoinApplication: Application() {
         super.onCreate()
 
         startKoin {
-            androidLogger()
+//            androidLogger()
             androidContext(this@KoinApplication)
             modules(listOf(
                 networkModule,

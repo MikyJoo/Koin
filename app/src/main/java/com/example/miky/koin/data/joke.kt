@@ -11,5 +11,5 @@ data class Joke(
 
 data class GetListResult(
     var type: String,
-    var value: List<Joke>
+    var value: ArrayList<Joke>
 )

@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.miky.koin.R
 import com.example.miky.koin.data.Joke
 
-class MainAdapter(private var context: Context, private var jokeList: List<Joke>) : RecyclerView.Adapter<MainAdapter.JokeViewHolder>() {
+class MainAdapter(
+    private var context: Context,
+    private var jokeList: ArrayList<Joke>,
+    var itemClickListener: (View, Int) -> Unit): RecyclerView.Adapter<MainAdapter.JokeViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JokeViewHolder {
         var itemView = LayoutInflater.from(context).inflate(R.layout.joke_list_item, parent, false)
@@ -31,7 +34,17 @@ class MainAdapter(private var context: Context, private var jokeList: List<Joke>
             var joke = jokeList[position]
             itemView.findViewById<TextView>(R.id.id_text).text = joke.id.toString()
             itemView.findViewById<TextView>(R.id.joke_text).text = joke.joke
+
+            itemView.setOnClickListener {
+                itemClickListener(it, position)
+            }
         }
+    }
+    
+    fun setList(list:ArrayList<Joke>) {
+        jokeList.clear()
+        jokeList.addAll(list)
+        notifyDataSetChanged()
     }
 }
 
